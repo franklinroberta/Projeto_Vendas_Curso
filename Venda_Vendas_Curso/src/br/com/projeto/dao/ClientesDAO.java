@@ -81,7 +81,7 @@ public class ClientesDAO {
             List<Clientes> lista = new ArrayList<>();
 
             //2° passo -criar comando sql
-            String sql = "selct * from tb_clientes";
+            String sql = "select * from tb_clientes";
 
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
