@@ -486,6 +486,11 @@ public class FrmCliente extends javax.swing.JFrame {
         btnexcluir.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnexcluir.setForeground(new java.awt.Color(0, 0, 0));
         btnexcluir.setText("Excluir");
+        btnexcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnexcluirActionPerformed(evt);
+            }
+        });
 
         btnnovo.setBackground(new java.awt.Color(255, 255, 255));
         btnnovo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -511,6 +516,11 @@ public class FrmCliente extends javax.swing.JFrame {
         btneditar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btneditar.setForeground(new java.awt.Color(0, 0, 0));
         btneditar.setText("Editar");
+        btneditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneditarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -613,6 +623,52 @@ public class FrmCliente extends javax.swing.JFrame {
         cbuf.setSelectedItem(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(),13).toString());
         
     }//GEN-LAST:event_tabelaClientesMouseClicked
+
+    private void btneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditarActionPerformed
+        // Botao alterar
+        
+       
+            Clientes obj = new Clientes();
+            
+            
+            obj.setNome(txtnome.getText());
+            obj.setRg(txtrg.getText());
+            obj.setCpf(txtcpf.getText());
+            obj.setEmail(txtemail.getText());
+            obj.setTelefone(txttelefone.getText());
+            obj.setCelular(txtcelular.getText());
+            obj.setCep(txtcep.getText());
+            obj.setEndereco(txtendereco.getText());
+            obj.setNumero(Integer.parseInt(txtnumero.getText()));
+            obj.setComplemento(txtcomplemento.getText());
+            obj.setBairro(txtbairro.getText());
+            obj.setCidade(txtcidade.getText());
+            obj.setUf(cbuf.getSelectedItem().toString());
+            
+            obj.setId(Integer.parseInt(txtcodigo.getText()));            
+            
+            ClientesDAO dao = new ClientesDAO();
+            
+            dao.alterarClientes(obj);
+            
+        
+    }//GEN-LAST:event_btneditarActionPerformed
+
+    private void btnexcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexcluirActionPerformed
+        // Botao excluir
+        
+       
+            Clientes obj = new Clientes();
+                       
+            obj.setId(Integer.parseInt(txtcodigo.getText()));
+            
+            
+            ClientesDAO dao = new ClientesDAO();
+            
+            dao.excluirClientes(obj);
+            
+      
+    }//GEN-LAST:event_btnexcluirActionPerformed
 
     /**
      * @param args the command line arguments

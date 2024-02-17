@@ -89,6 +89,8 @@ public class ClientesDAO {
             stmt.setString(11, obj.getBairro());
             stmt.setString(12, obj.getCidade());
             stmt.setString(13, obj.getUf());
+            
+            stmt.setInt(14, obj.getId());
 
             //3 passo - execultar o comando sql
             stmt.execute();
