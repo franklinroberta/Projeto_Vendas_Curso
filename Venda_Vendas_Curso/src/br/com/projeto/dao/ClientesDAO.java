@@ -50,12 +50,14 @@ public class ClientesDAO {
             stmt.setString(11, obj.getBairro());
             stmt.setString(12, obj.getCidade());
             stmt.setString(13, obj.getUf());
+            stmt.setInt(14, obj.getId());
+            
 
             //3 passo - execultar o comando sql
             stmt.execute();
             stmt.close();
 
-            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
 
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro: " + erro);
@@ -69,8 +71,8 @@ public class ClientesDAO {
         try {
 
             //1 passo -criar comando sql
-            String sql = "update tb_clientes set nome=?, rg=?, cpf=? ,email=?, telefone=?, celular=?, cep=?, endereco=?, numero=?, complemento=?, bairro=?, cidade=?, estado=?"
-                    + "values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "update tb_clientes set nome=?, rg=?, cpf=? ,email=?, telefone=?, celular=?, cep=?, endereco=?, numero=?, complemento=?, bairro=?, cidade=?, estado=? where id=?";
+                    
 
             //2 passo - conectar o banco de dados e organizar o comando sql
             PreparedStatement stmt = con.prepareStatement(sql);

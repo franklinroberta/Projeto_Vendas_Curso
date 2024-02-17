@@ -438,6 +438,7 @@ public class FrmCliente extends javax.swing.JFrame {
         jButton1.setText("Pesquisar");
 
         tabelaClientes.setBackground(new java.awt.Color(255, 255, 255));
+        tabelaClientes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tabelaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
