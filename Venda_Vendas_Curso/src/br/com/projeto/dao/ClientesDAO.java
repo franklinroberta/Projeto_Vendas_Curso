@@ -64,16 +64,68 @@ public class ClientesDAO {
     }
 
     //Metodo alterarClientes
-    public void alterarClientes() {
+    public void alterarClientes(Clientes obj) {
+        
+        try {
+
+            //1 passo -criar comando sql
+            String sql = "update tb_clientes set nome=?, rg=?, cpf=? ,email=?, telefone=?, celular=?, cep=?, endereco=?, numero=?, complemento=?, bairro=?, cidade=?, estado=?"
+                    + "values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+            //2 passo - conectar o banco de dados e organizar o comando sql
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, obj.getNome());
+            stmt.setString(2, obj.getRg());
+            stmt.setString(3, obj.getCpf());
+            stmt.setString(4, obj.getEmail());
+            stmt.setString(5, obj.getTelefone());
+            stmt.setString(6, obj.getCelular());
+            stmt.setString(7, obj.getCep());
+            stmt.setString(8, obj.getEndereco());
+            stmt.setInt(9, obj.getNumero());
+            stmt.setString(10, obj.getComplemento());
+            stmt.setString(11, obj.getBairro());
+            stmt.setString(12, obj.getCidade());
+            stmt.setString(13, obj.getUf());
+
+            //3 passo - execultar o comando sql
+            stmt.execute();
+            stmt.close();
+
+            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro: " + erro);
+        }
 
     }
 
     //Metodo excluirClientes
-    public void excluirClientes() {
+    public void excluirClientes(Clientes obj) {
+        
+           try {
+
+            //1 passo -criar comando sql
+            String sql = "delete from tb_clientes where id = ?";
+
+            //2 passo - conectar o banco de dados e organizar o comando sql
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, obj.getId());
+
+
+            //3 passo - execultar o comando sql
+            stmt.execute();
+            stmt.close();
+
+            JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
+
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro: " + erro);
+        }
 
     }
 
-    //Metodo listar clientes
+    //Metodo excluir clientes
     public List<Clientes> listarClientes() {
 
         try {
