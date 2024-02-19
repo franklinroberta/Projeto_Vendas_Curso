@@ -214,7 +214,7 @@ public class ClientesDAO {
     }
         
     // Metodo buscar cliente - retorna uma lista
-    public List buscarPorNome (String nome){   
+    public List listaPorNome (String nome){   
         try {
 
             //1° passo criar a lista       
