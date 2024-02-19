@@ -8,6 +8,7 @@ import br.com.pacote.jdbc.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import br.com.projeto.model.Clientes;
+import br.com.projeto.model.Funcionarios;
 import br.com.projeto.model.WebServiceCep;
 import com.mysql.jdbc.ResultSetImpl;
 import java.util.ArrayList;
@@ -274,6 +275,10 @@ public class ClientesDAO {
             return null;
         }
 
+    }
+
+    public void cadastrarFuncionarios(Funcionarios obj) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     
