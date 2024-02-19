@@ -5,53 +5,52 @@
 package br.com.projeto.dao;
 
 import br.com.pacote.jdbc.ConnectionFactory;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import br.com.projeto.model.Clientes;
+import br.com.projeto.model.Fornecedores;
 import br.com.projeto.model.Funcionarios;
 import br.com.projeto.model.WebServiceCep;
-import com.mysql.jdbc.ResultSetImpl;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import java.sql.ResultSet;
 
 /**
  *
  * @author frank
  */
-public class ClientesDAO {
+public class FornecedoresDAO {
+    
+      private Connection con;
 
-    private Connection con;
-
-    public ClientesDAO() {
+    public FornecedoresDAO() {
         this.con = new ConnectionFactory().getConnection();
     }
-
-    //Metodo cadastrarClientes
-    public void cadastrarClientes(Clientes obj) {
+    
+       //Metodo cadastrarFornecedores
+    public void cadastrarFornecedores(Fornecedores obj) {
 
         try {
 
             //1 passo -criar comando sql
-            String sql = "insert into tb_clientes(nome, rg, cpf ,email, telefone, celular, cep, endereco, numero, complemento, bairro, cidade, estado)"
-                    + "values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "insert into tb_fornecedores(nome, cnpj ,email, telefone, celular, cep, endereco, numero, complemento, bairro, cidade, estado)"
+                    + "values (?,?,?,?,?,?,?,?,?,?,?,?)";
 
             //2 passo - conectar o banco de dados e organizar o comando sql
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, obj.getNome());
-            stmt.setString(2, obj.getRg());
-            stmt.setString(3, obj.getCpf());
-            stmt.setString(4, obj.getEmail());
-            stmt.setString(5, obj.getTelefone());
-            stmt.setString(6, obj.getCelular());
-            stmt.setString(7, obj.getCep());
-            stmt.setString(8, obj.getEndereco());
-            stmt.setInt(9, obj.getNumero());
-            stmt.setString(10, obj.getComplemento());
-            stmt.setString(11, obj.getBairro());
-            stmt.setString(12, obj.getCidade());
-            stmt.setString(13, obj.getUf());
+            stmt.setString(2, obj.getCnpj());
+            stmt.setString(3, obj.getEmail());
+            stmt.setString(4, obj.getTelefone());
+            stmt.setString(5, obj.getCelular());
+            stmt.setString(6, obj.getCep());
+            stmt.setString(7, obj.getEndereco());
+            stmt.setInt(8, obj.getNumero());
+            stmt.setString(9, obj.getComplemento());
+            stmt.setString(10, obj.getBairro());
+            stmt.setString(11, obj.getCidade());
+            stmt.setString(12, obj.getUf());
             
             
 
@@ -66,53 +65,15 @@ public class ClientesDAO {
         }
 
     }
-
-    //Metodo alterarClientes
-    public void alterarClientes(Clientes obj) {
-        
-        try {
-
-            //1 passo -criar comando sql
-            String sql = "update tb_clientes set nome=?, rg=?, cpf=? ,email=?, telefone=?, celular=?, cep=?, endereco=?, numero=?, complemento=?, bairro=?, cidade=?, estado=? where id=?";
-                    
-
-            //2 passo - conectar o banco de dados e organizar o comando sql
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, obj.getNome());
-            stmt.setString(2, obj.getRg());
-            stmt.setString(3, obj.getCpf());
-            stmt.setString(4, obj.getEmail());
-            stmt.setString(5, obj.getTelefone());
-            stmt.setString(6, obj.getCelular());
-            stmt.setString(7, obj.getCep());
-            stmt.setString(8, obj.getEndereco());
-            stmt.setInt(9, obj.getNumero());
-            stmt.setString(10, obj.getComplemento());
-            stmt.setString(11, obj.getBairro());
-            stmt.setString(12, obj.getCidade());
-            stmt.setString(13, obj.getUf());
-            
-            stmt.setInt(14, obj.getId());
-
-            //3 passo - execultar o comando sql
-            stmt.execute();
-            stmt.close();
-
-            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
-
-        } catch (Exception erro) {
-            JOptionPane.showMessageDialog(null, "Erro: " + erro);
-        }
-
-    }
-
-    //Metodo excluirClientes
-    public void excluirClientes(Clientes obj) {
+    
+    //Metodo excluir fornecedores
+    
+    public void excluirFornecedores(Fornecedores obj) {
         
            try {
 
             //1 passo -criar comando sql
-            String sql = "delete from tb_clientes where id = ?";
+            String sql = "delete from tb_fornecedores where id = ?";
 
             //2 passo - conectar o banco de dados e organizar o comando sql
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -129,28 +90,65 @@ public class ClientesDAO {
             JOptionPane.showMessageDialog(null, "Erro: " + erro);
         }
 
-    }
+    }    
+    
+     //Metodo alterar fornecedores
+    public void alterarFornecedores(Fornecedores obj) {
+        
+        try {
 
-    //Metodo listar clientes
-    public List<Clientes> listarClientes() {
+            //1 passo -criar comando sql
+            String sql = "update tb_fornecedores set nome=?, cnpj=? ,email=?, telefone=?, celular=?, cep=?, endereco=?, numero=?, complemento=?, bairro=?, cidade=?, estado=? where id=?";
+                    
+
+            //2 passo - conectar o banco de dados e organizar o comando sql
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, obj.getNome());
+            stmt.setString(2, obj.getCnpj());
+            stmt.setString(3, obj.getEmail());
+            stmt.setString(4, obj.getTelefone());
+            stmt.setString(5, obj.getCelular());
+            stmt.setString(6, obj.getCep());
+            stmt.setString(7, obj.getEndereco());
+            stmt.setInt(8, obj.getNumero());
+            stmt.setString(9, obj.getComplemento());
+            stmt.setString(10, obj.getBairro());
+            stmt.setString(11, obj.getCidade());
+            stmt.setString(12, obj.getUf());
+            
+            stmt.setInt(13, obj.getId());
+
+            //3 passo - execultar o comando sql
+            stmt.execute();
+            stmt.close();
+
+            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
+
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro: " + erro);
+        }
+
+    }
+    
+      //Metodo listar Fornecedores
+    public List<Fornecedores> listarFornecedores() {
 
         try {
             //1° passo criar a lista
-            List<Clientes> lista = new ArrayList<>();
+            List<Fornecedores> lista = new ArrayList<>();
 
             //2° passo -criar comando sql
-            String sql = "select * from tb_clientes";
+            String sql = "select * from tb_fornecedores";
 
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Clientes obj = new Clientes();
+                Fornecedores obj = new Fornecedores();
 
                 obj.setId(rs.getInt("id"));
-                obj.setNome(rs.getString("nome"));
-                obj.setRg(rs.getString("rg"));
-                obj.setCpf(rs.getString("cpf"));
+                obj.setNome(rs.getString("nome"));                
+                obj.setCnpj(rs.getString("cnpj"));
                 obj.setEmail(rs.getString("email"));
                 obj.setTelefone(rs.getString("telefone"));
                 obj.setCelular(rs.getString("celular"));
@@ -175,23 +173,22 @@ public class ClientesDAO {
     
     //Meetodo Consulta por nome
     
-    public Clientes consultaPorNome(String nome){
+    public Fornecedores consultaPorNome(String nome){
         
         try {
             
-             String sql = "select * from tb_clientes where nome = ?";
+             String sql = "select * from tb_Fornecedores where nome = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, nome);
             
             ResultSet rs = stmt.executeQuery();
             
-              Clientes obj = new Clientes();  
+              Fornecedores obj = new Fornecedores();  
             
             if (rs.next()) {     
                 obj.setId(rs.getInt("id"));
-                obj.setNome(rs.getString("nome"));
-                obj.setRg(rs.getString("rg"));
-                obj.setCpf(rs.getString("cpf"));
+                obj.setNome(rs.getString("nome"));            
+                obj.setCnpj(rs.getString("cnpj"));
                 obj.setEmail(rs.getString("email"));
                 obj.setTelefone(rs.getString("telefone"));
                 obj.setCelular(rs.getString("celular"));
@@ -208,27 +205,26 @@ public class ClientesDAO {
             return obj;
             
         } catch (Exception erro) {
-            JOptionPane.showMessageDialog(null, "Cliente não encontrado! " + erro);
+            JOptionPane.showMessageDialog(null, "Fornecedor não encontrado! " + erro);
             return null;
         }
     }
         
-    // Metodo buscar cliente - retorna uma lista
+    // Metodo buscar Fornecedores - retorna uma lista
     public List listaPorNome (String nome){   
         try {
 
             //1° passo criar a lista       
-            String sql = "select * from tb_clientes where like ?";
+            String sql = "select * from tb_fornecedores where like ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, nome);          
             ResultSet rs = stmt.executeQuery();    
-            Clientes obj = new Clientes();
+            Fornecedores obj = new Fornecedores();
             
             if (rs.next()) {         
                 obj.setId(rs.getInt("id"));
-                obj.setNome(rs.getString("nome"));
-                obj.setRg(rs.getString("rg"));
-                obj.setCpf(rs.getString("cpf"));
+                obj.setNome(rs.getString("nome"));           
+                obj.setCnpj(rs.getString("cnpj"));
                 obj.setEmail(rs.getString("email"));
                 obj.setTelefone(rs.getString("telefone"));
                 obj.setCelular(rs.getString("celular"));
@@ -246,22 +242,20 @@ public class ClientesDAO {
 
         } catch (Exception erro) {
 
-            JOptionPane.showMessageDialog(null, "Cliente não encontrado! " + erro);
+            JOptionPane.showMessageDialog(null, "Fornecedor não encontrado! " + erro);
 
             return null;
 
         }
     }
     
-    //Busca CEP
+       //Busca CEP
     
-    
-    public Clientes buscaCep(String cep) {
+    public Fornecedores buscaCep(String cep) {
 
         WebServiceCep webServiceCep = WebServiceCep.searchCep(cep);
 
-
-        Clientes obj = new Clientes();
+        Fornecedores obj = new Fornecedores();
 
         if (webServiceCep.wasSuccessful()) {
             obj.setEndereco(webServiceCep.getLogradouroFull());
@@ -275,6 +269,5 @@ public class ClientesDAO {
             return null;
         }
 
-    }    
-   
+    }
 }
