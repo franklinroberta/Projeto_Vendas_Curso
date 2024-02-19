@@ -8,6 +8,7 @@ import br.com.pacote.jdbc.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import br.com.projeto.model.Clientes;
+import br.com.projeto.model.WebServiceCep;
 import com.mysql.jdbc.ResultSetImpl;
 import java.util.ArrayList;
 import java.util.List;
@@ -211,7 +212,7 @@ public class ClientesDAO {
         }
     }
         
-    //ERRO - Metodo buscar cliente - retorna uma lista
+    // Metodo buscar cliente - retorna uma lista
     public List buscarPorNome (String nome){   
         try {
 
@@ -250,5 +251,31 @@ public class ClientesDAO {
 
         }
     }
+    
+    //Busca CEP
+    
+    
+    	  public Clientes buscaCep(String cep) {
+       
+        WebServiceCep webServiceCep = WebServiceCep.searchCep(cep);
+       
+
+        Clientes obj = new Clientes();
+
+        if (webServiceCep.wasSuccessful()) {
+            obj.setEndereco(webServiceCep.getLogradouroFull());
+            obj.setCidade(webServiceCep.getCidade());
+            obj.setBairro(webServiceCep.getBairro());
+            obj.setUf(webServiceCep.getUf());
+            return obj;
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro numero: " + webServiceCep.getResulCode());
+            JOptionPane.showMessageDialog(null, "Descrição do erro: " + webServiceCep.getResultText());
+            return null;
+        }
+
+    }
+    
+    
 
 }

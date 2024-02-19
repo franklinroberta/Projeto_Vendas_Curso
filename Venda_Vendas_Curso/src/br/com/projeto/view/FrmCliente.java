@@ -7,6 +7,7 @@ package br.com.projeto.view;
 import br.com.projeto.dao.ClientesDAO;
 import br.com.projeto.model.Clientes;
 import br.com.projeto.model.Utilitarios;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -147,6 +148,7 @@ public class FrmCliente extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Código:");
 
+        txtcodigo.setEditable(false);
         txtcodigo.setBackground(new java.awt.Color(255, 255, 255));
         txtcodigo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtcodigo.setForeground(new java.awt.Color(0, 0, 0));
@@ -210,6 +212,11 @@ public class FrmCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtcep.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtcep.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtcepKeyPressed(evt);
+            }
+        });
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -255,7 +262,7 @@ public class FrmCliente extends javax.swing.JFrame {
         cbuf.setBackground(new java.awt.Color(255, 255, 255));
         cbuf.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cbuf.setForeground(new java.awt.Color(0, 0, 0));
-        cbuf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "RJ", "SP", "MG", "PB" }));
+        cbuf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
 
         txtcomplemento.setBackground(new java.awt.Color(255, 255, 255));
         txtcomplemento.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -767,6 +774,26 @@ public class FrmCliente extends javax.swing.JFrame {
   
 
     }//GEN-LAST:event_btnbuscarActionPerformed
+
+    private void txtcepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcepKeyPressed
+        // Consulta CEP
+        
+        //Programacao do keypress
+	if (evt.getKeyCode() == KeyEvent.VK_ENTER) { 
+         Clientes obj =  new Clientes();
+         ClientesDAO dao = new ClientesDAO();
+         obj = dao.buscaCep(txtcep.getText());
+         
+         txtendereco.setText(obj.getEndereco());
+         txtbairro.setText(obj.getBairro());
+         txtcidade.setText(obj.getCidade());
+         cbuf.setSelectedItem(obj.getUf());               
+         System.out.println(obj.getUf());
+         
+     }
+        
+        
+    }//GEN-LAST:event_txtcepKeyPressed
 
     /**
      * @param args the command line arguments
