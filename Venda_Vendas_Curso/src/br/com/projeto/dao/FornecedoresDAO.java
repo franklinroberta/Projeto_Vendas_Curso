@@ -215,7 +215,7 @@ public class FornecedoresDAO {
         try {
 
             //1° passo criar a lista       
-            String sql = "select * from tb_fornecedores where like ?";
+            String sql = "select * from tb_fornecedores where nome like ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, nome);          
             ResultSet rs = stmt.executeQuery();    
