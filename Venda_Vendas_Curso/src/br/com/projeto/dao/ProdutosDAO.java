@@ -92,5 +92,60 @@ public class ProdutosDAO {
             return null;
         }
     }
+    
+    //Metodo alterar produtos
+    public void alterarProdutos(Produtos obj) {
+
+        try {
+
+            //1 passo -criar comando sql
+            String sql = "update tb_produtos set descricao=?, preco=?, qtd_estoque=? ,for_id=? where id=?";
+
+            //2 passo - conectar o banco de dados e organizar o comando sql
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, obj.getDescricao());
+            stmt.setDouble(2, obj.getPreco());
+            stmt.setInt(3, obj.getQtd_estoque());
+
+            stmt.setInt(4, obj.getFornecedor().getId());
+            
+            stmt.setInt(5, obj.getId());
+
+            //3 passo - execultar o comando sql
+            stmt.execute();
+            stmt.close();
+
+            JOptionPane.showMessageDialog(null, "Produto alterado com sucesso!");
+
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro: " + erro);
+        }
+
+    }
+    //Metodo excluir produtos
+    public void excluirProdutos(Produtos obj) {
+        
+           try {
+
+            //1 passo -criar comando sql
+            String sql = "delete from tb_produtos where id = ?";
+
+            //2 passo - conectar o banco de dados e organizar o comando sql
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, obj.getId());
+
+
+            //3 passo - execultar o comando sql
+            stmt.execute();
+            stmt.close();
+
+            JOptionPane.showMessageDialog(null, "Produto excluido com sucesso!");
+
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro: " + erro);
+        }
+
+    }
+
 
 }

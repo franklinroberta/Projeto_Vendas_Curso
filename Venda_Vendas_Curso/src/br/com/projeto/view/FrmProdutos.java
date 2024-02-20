@@ -454,25 +454,38 @@ public class FrmProdutos extends javax.swing.JFrame {
 
         txtcodigo.setText(tabelaProduto.getValueAt(tabelaProduto.getSelectedRow(), 0).toString());
         txtdescricao.setText(tabelaProduto.getValueAt(tabelaProduto.getSelectedRow(), 1).toString());
-        txtpreco.setText(tabelaProduto.getValueAt(tabelaProduto.getSelectedRow(), 4).toString());
-        cbfornecedor.setSelectedItem(tabelaProduto.getValueAt(tabelaProduto.getSelectedRow(), 13).toString());
-
+        txtpreco.setText(tabelaProduto.getValueAt(tabelaProduto.getSelectedRow(), 2).toString());
+        txtqtdestoque.setText(tabelaProduto.getValueAt(tabelaProduto.getSelectedRow(), 3).toString());
+        
+        
+        Fornecedores f = new Fornecedores();
+        FornecedoresDAO dao = new FornecedoresDAO();
+        f = dao.consultaPorNome(tabelaProduto.getValueAt(tabelaProduto.getSelectedRow(), 4).toString());
+        
+        cbfornecedor.removeAllItems();
+        cbfornecedor.getModel().setSelectedItem(f);
+        
     }//GEN-LAST:event_tabelaProdutoMouseClicked
 
     private void btnsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalvarActionPerformed
         // Botao alterar
 
-        Clientes obj = new Clientes();
-
-        obj.setNome(txtdescricao.getText());
-        obj.setEmail(txtpreco.getText());
-        obj.setUf(cbfornecedor.getSelectedItem().toString());
-
+        Produtos obj = new Produtos();        
         obj.setId(Integer.parseInt(txtcodigo.getText()));
+        obj.setDescricao(txtdescricao.getText());
+        obj.setPreco(Double.parseDouble(txtpreco.getText()));
+        obj.setQtd_estoque(Integer.parseInt(txtqtdestoque.getText()));
 
-        ClientesDAO dao = new ClientesDAO();
+       //criar um objeto de Fornecedor
+       
+       Fornecedores f = new Fornecedores();
+       f = (Fornecedores) cbfornecedor.getSelectedItem();
+       
+       obj.setFornecedor(f);        
+        
+        ProdutosDAO dao = new ProdutosDAO();
 
-        dao.alterarClientes(obj);
+        dao.alterarProdutos(obj);
 
         new Utilitarios().LimpaTela(jPanel2);
 
@@ -482,10 +495,14 @@ public class FrmProdutos extends javax.swing.JFrame {
     private void btnexcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexcluirActionPerformed
         // Botao excluir
 
-        Clientes obj = new Clientes();
+        Produtos obj = new Produtos();
+
         obj.setId(Integer.parseInt(txtcodigo.getText()));
-        ClientesDAO dao = new ClientesDAO();
-        dao.excluirClientes(obj);
+
+        ProdutosDAO dao = new ProdutosDAO();
+
+        dao.excluirProdutos(obj);
+        
         new Utilitarios().LimpaTela(jPanel2);
 
 
