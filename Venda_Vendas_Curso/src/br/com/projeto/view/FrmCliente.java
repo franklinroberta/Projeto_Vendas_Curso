@@ -138,6 +138,11 @@ public class FrmCliente extends javax.swing.JFrame {
         txtnome.setBackground(new java.awt.Color(255, 255, 255));
         txtnome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtnome.setForeground(new java.awt.Color(0, 0, 0));
+        txtnome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnomeActionPerformed(evt);
+            }
+        });
 
         txtemail.setBackground(new java.awt.Color(255, 255, 255));
         txtemail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -359,8 +364,9 @@ public class FrmCliente extends javax.swing.JFrame {
                                     .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                     .addComponent(txtnome)
-                                    .addGap(135, 135, 135)
-                                    .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(117, 117, 117))))))
                 .addContainerGap(509, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -836,6 +842,10 @@ public class FrmCliente extends javax.swing.JFrame {
             });
         }
     }//GEN-LAST:event_txtpesquisaKeyPressed
+
+    private void txtnomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnomeActionPerformed
 
     /**
      * @param args the command line arguments

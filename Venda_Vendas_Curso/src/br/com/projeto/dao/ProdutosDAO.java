@@ -226,6 +226,39 @@ public class ProdutosDAO {
         }
     }
 
+      //Consulta por nome exato
+     public Produtos consultaPorCodigo(int id) {
 
+        try {
+            //1° passo criar a lista
+           
+
+            //2° passo -criar comando sql
+            String sql = "select * from tb_produtos a where id = ?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, id);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            Produtos obj = new Produtos();
+            Fornecedores f = new Fornecedores();
+
+            if (rs.next()) {
+              
+                obj.setId(rs.getInt("id"));
+                obj.setDescricao(rs.getString("descricao"));
+                obj.setPreco(rs.getDouble("preco"));
+                obj.setQtd_estoque(rs.getInt("qtd_estoque"));
+               
+            }
+
+            return obj;
+
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro: " + erro);
+            return null;
+        }
+    }
 
 }
